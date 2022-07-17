@@ -2,9 +2,11 @@
 
 A script that automatically exports and crops Excel tables as individual pdf files.  
 
-This is useful if you want to add Excel tables to a LaTeX document (assuming the widths are consistent).  
+This is useful if you want to add Excel tables to a LaTeX document (assuming the widths and text sizes are consistent).  
 
 However, it only works with Excel installed on Windows and very slight undercropping can occur around the edges of the tables (this can be tuned by changing the absolute offsets).  
+
+Last tested with Python 3.10.5 (64-bit).  
 
 To install the required Python libraries:  
 ```
@@ -17,7 +19,6 @@ python .\excelerater.py
 ```
 
 <!-- To do:
-Handle no excel documents
 Handle pdf already open
 Check consistency for different table sizes
 Check if excel actually installed
@@ -25,6 +26,4 @@ Check it is Windows running script
 Turn into executable
 Excel table width manipulation
 Cycle through different sheets in Excel files
-What if folder is empty
-PDF and PDFs print
-Check requiements contain all dependencies -->
+PDF and PDFs print -->

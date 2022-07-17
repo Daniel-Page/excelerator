@@ -7,47 +7,55 @@ from win32com import client
 from pdfCropMargins import crop
 
 dirName = os.path.dirname(__file__) # Directory that this script is in
-print("Excel files found in " + dirName + ":")
 
 fileNames = [] # Excel file names found
 i = 1 # File counter
 # Find all Excel in the same directory as this script
 for file in glob.glob("*.xlsx"):
+    if i == 1:
+      print("Excel files found in " + dirName + ":")
     fileNames.append(file)
     print(str(i) + ": " + file) # Display the Excel files found
     i += 1
 
-# Check whether the output folder exists
-outputExists = os.path.isdir("output")
+if len(fileNames) > 0:
 
-# Create a new directory if output does not exist 
-if not outputExists:
-  os.mkdir("output")
+  # Check whether the output folder exists
+  outputExists = os.path.isdir("output")
 
-excel = client.Dispatch("Excel.Application") # Open Microsoft Excel
+  # Create a new directory if output does not exist 
+  if not outputExists:
+    os.mkdir("output")
 
-print("\nPDFs exported to " + os.path.join(dirName + '\\output') + ":")
-i = 1 # File export counter
-for file in fileNames:
-    sheets = excel.Workbooks.Open(os.path.join(dirName, file)) # Read Excel File
-    work_sheets = sheets.Worksheets[0] # Only first sheet exported
-    work_sheets.ExportAsFixedFormat(0, os.path.join(dirName + '\\output\\', file.strip(".xlsx") + '.pdf'))
-    sheets.Close(True)
-    print(str(i) + ": " + file.strip(".xlsx") + '.pdf')
-    i += 1
+  excel = client.Dispatch("Excel.Application") # Open Microsoft Excel
 
-print("\nPDFs cropped in " + os.path.join(dirName + '\\output'))
-i = 1 # File export counter
-for file in fileNames:
-    os.chdir(dirName + '\\output\\')
-    # -a4: absolute offset, -p4: percentage retain 
-    # Order: "left","bottom","right","top"
-    # -mo: modify original
-    # Quiet: stop errors from being printed
-    crop(["-a4", "0.35","0.35","-0.1","0","-p4", "0","0","0","0","-mo", file.strip(".xlsx") + '.pdf'], quiet=True)
-    os.remove(os.path.join(dirName + '\\output\\', file.strip(".xlsx") + '_uncropped.pdf'))
-    print(str(i) + ": " + file.strip(".xlsx") + '.pdf')
-    i += 1
+  print("\nPDFs exported to " + os.path.join(dirName + '\\output') + ":")
+  
+  i = 1 # File export counter
+  
+  for file in fileNames:
+      sheets = excel.Workbooks.Open(os.path.join(dirName, file)) # Read Excel File
+      work_sheets = sheets.Worksheets[0] # Only first sheet exported
+      work_sheets.ExportAsFixedFormat(0, os.path.join(dirName + '\\output\\', file.strip(".xlsx") + '.pdf'))
+      sheets.Close(True)
+      print(str(i) + ": " + file.strip(".xlsx") + '.pdf')
+      i += 1
 
-end = time.time()
-print("\nFinished in " + str(round(end - start,2)) + "s\n")
+  print("\nPDFs cropped in " + os.path.join(dirName + '\\output'))
+  i = 1 # File export counter
+  for file in fileNames:
+      os.chdir(dirName + '\\output\\')
+      # -a4: absolute offset, -p4: percentage retain 
+      # Order: "left","bottom","right","top"
+      # -mo: modify original
+      # Quiet: stop errors from being printed
+      crop(["-a4", "0.35","0.35","-0.1","0","-p4", "0","0","0","0","-mo", file.strip(".xlsx") + '.pdf'], quiet=True)
+      os.remove(os.path.join(dirName + '\\output\\', file.strip(".xlsx") + '_uncropped.pdf'))
+      print(str(i) + ": " + file.strip(".xlsx") + '.pdf')
+      i += 1
+
+  end = time.time()
+  print("\nFinished in " + str(round(end - start,2)) + "s\n")
+
+else:
+  print("No Excel files found in " + dirName + "\n")
