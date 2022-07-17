@@ -45,11 +45,15 @@ if len(fileNames) > 0:
   i = 1 # File export counter
   for file in fileNames:
       os.chdir(dirName + '\\output\\')
-      # -a4: absolute offset, -p4: percentage retain 
-      # Order: "left","bottom","right","top"
+      # -c p: calculates bounding box with pdftoppm
+      # -t NUM: threshold
+      # -a4 BP BP BP BP: absolute offset
+      # -p4 PCT PCT PCT PCT: percentage retain 
+      # Order is "left","bottom","right","top"
       # -mo: modify original
-      # Quiet: stop errors from being printed
-      crop(["-a4", "0.35","0.35","-0.1","0","-p4", "0","0","0","0","-mo", file.strip(".xlsx") + '.pdf'], quiet=True)
+      # -x DPI, -y DPI
+      # quiet: stop errors from being printed
+      crop(["-c","p","-t","10","-a4", "0","0","0","0.05","-p4", "0","0","0","0","-mo","-x","500","-y","500", file.strip(".xlsx") + '.pdf'], quiet=True)
       os.remove(os.path.join(dirName + '\\output\\', file.strip(".xlsx") + '_uncropped.pdf'))
       print(str(i) + ": " + file.strip(".xlsx") + '.pdf')
       i += 1
