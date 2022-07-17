@@ -8,3 +8,8 @@ To install the required Pyhton libraries run the following in a terminal (CMD or
 ```
 pip install -r requirements.txt
 ```
+
+<!-- To do:
+Handle no excel documents
+Handle pdf already open
+Check consistency for different table sizes -->

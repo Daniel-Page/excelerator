@@ -40,8 +40,9 @@ print("\nPDFs cropped in " + os.path.join(dirName + '\\output'))
 i = 1 # File export counter
 for file in fileNames:
     os.chdir(dirName + '\\output\\')
-    # [-p4 PCT PCT PCT PCT] left bottom right top
-    crop(["-p4", "0","0","0","0","-c","-v", file.strip(".xlsx") + '.pdf'], quiet=True) # Quiet argument removes printed errors
+    # [-p4 left bottom right top] - PCT: percentage
+    # [-a4 left bottom right top] - BP: big point
+    crop(["-a4", "0.3","0.3","-0.2","0","-p4", "0","0","0","0", file.strip(".xlsx") + '.pdf'], quiet=True) # Quiet argument removes printed errors
     print(str(i) + ": " + file.strip(".xlsx") + '_cropped.pdf')
     i += 1
 
