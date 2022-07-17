@@ -36,9 +36,9 @@ if len(fileNames) > 0:
   for file in fileNames:
       sheets = excel.Workbooks.Open(os.path.join(dirName, file)) # Read Excel File
       work_sheets = sheets.Worksheets[0] # Only first sheet exported
-      work_sheets.ExportAsFixedFormat(0, os.path.join(dirName + '\\output\\', file.strip(".xlsx") + '.pdf'))
+      work_sheets.ExportAsFixedFormat(0, os.path.join(dirName + '\\output\\', file.removesuffix(".xlsx") + '.pdf'))
       sheets.Close(True)
-      print(str(i) + ": " + file.strip(".xlsx") + '.pdf')
+      print(str(i) + ": " + file.removesuffix(".xlsx") + '.pdf')
       i += 1
 
   print("\nPDFs cropped in " + os.path.join(dirName + '\\output'))
@@ -53,9 +53,9 @@ if len(fileNames) > 0:
       # -mo: modify original
       # -x DPI, -y DPI
       # quiet: stop errors from being printed
-      crop(["-c","p","-t","10","-a4", "0","0","0","0.05","-p4", "0","0","0","0","-mo","-x","500","-y","500", file.strip(".xlsx") + '.pdf'], quiet=True)
-      os.remove(os.path.join(dirName + '\\output\\', file.strip(".xlsx") + '_uncropped.pdf'))
-      print(str(i) + ": " + file.strip(".xlsx") + '.pdf')
+      crop(["-c","p","-t","10","-a4", "0","0","0","0.05","-p4", "0","0","0","0","-mo","-x","500","-y","500", file.removesuffix(".xlsx") + '.pdf'], quiet=True)
+      os.remove(os.path.join(dirName + '\\output\\', file.removesuffix(".xlsx") + '_uncropped.pdf'))
+      print(str(i) + ": " + file.removesuffix(".xlsx") + '.pdf')
       i += 1
 
   end = time.time()
