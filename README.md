@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 ## Running  
 
-To the run the script:
+To run the script:
 ```
 python .\excelerater.py
 ```
