@@ -26,7 +26,7 @@ if not outputExists:
 
 excel = client.Dispatch("Excel.Application") # Open Microsoft Excel
 
-print("\nFiles exported to " + os.path.join(dirName + '\\output') + ":")
+print("\nPDFs exported to " + os.path.join(dirName + '\\output') + ":")
 i = 1 # File export counter
 for file in fileNames:
     sheets = excel.Workbooks.Open(os.path.join(dirName, file)) # Read Excel File
@@ -40,18 +40,14 @@ print("\nPDFs cropped in " + os.path.join(dirName + '\\output'))
 i = 1 # File export counter
 for file in fileNames:
     os.chdir(dirName + '\\output\\')
-    # [-p4 left bottom right top] - PCT: percentage
-    # [-a4 left bottom right top] - BP: big point
-    crop(["-a4", "0.3","0.3","-0.2","0","-p4", "0","0","0","0", file.strip(".xlsx") + '.pdf'], quiet=True) # Quiet argument removes printed errors
-    print(str(i) + ": " + file.strip(".xlsx") + '_cropped.pdf')
+    # -a4: absolute offset, -p4: percentage retain 
+    # Order: "left","bottom","right","top"
+    # -mo: modify original
+    # Quiet: stop errors from being printed
+    crop(["-a4", "0.35","0.35","-0.1","0","-p4", "0","0","0","0","-mo", file.strip(".xlsx") + '.pdf'], quiet=True)
+    os.remove(os.path.join(dirName + '\\output\\', file.strip(".xlsx") + '_uncropped.pdf'))
+    print(str(i) + ": " + file.strip(".xlsx") + '.pdf')
     i += 1
-
-print("\nPDFs deleted from " + os.path.join(dirName + '\\output'))
-i = 1 # File delete counter
-for file in fileNames:
-  os.remove(os.path.join(dirName + '\\output\\', file.strip(".xlsx") + '.pdf'))
-  print(str(i) + ": " + file.strip(".xlsx") + '.pdf')
-  i += 1
 
 end = time.time()
 print("\nFinished in " + str(round(end - start,2)) + "s\n")
