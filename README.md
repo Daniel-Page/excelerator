@@ -18,6 +18,8 @@ To the run the script:
 python .\excelerater.py
 ```
 
+All .xlsx files in the same directory as the script will be processed and exported to an output folder.
+
 <!-- To do:
 Handle pdf already open
 Check consistency for different table sizes
