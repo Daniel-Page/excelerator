@@ -1,4 +1,4 @@
 pdfCropMargins==1.0.9
 Pillow==9.2.0
-PyPDF2==2.5.0
+PyPDF2==2.6.0
 pywin32==304
