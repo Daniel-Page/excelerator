@@ -5,11 +5,11 @@ A script that automatically exports and crops Excel tables as individual PDF fil
 ## Compatibility and Requirements
 
 Works with:  
-- Python 3.10.5 (64-bit)
+- Python v3.10.5 (64-bit)
 - Windows 10 Pro
-- Excel for Microsoft 365 Version 2206 (64-bit)   
+- Excel for Microsoft 365 v2206 (64-bit)   
 
-To install the required Python libraries:  
+To install the required Python libraries:
 ```
 pip install -r requirements.txt
 ```
