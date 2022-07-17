@@ -1,0 +1,3 @@
+pywin32==304
+pdfCropMargins==1.0.9
+PyPDF2==2.5.0
