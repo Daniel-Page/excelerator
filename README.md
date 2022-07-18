@@ -1,6 +1,6 @@
 # Excelerator  
 
-A script that automatically exports and crops Excel tables as individual PDF files. This is useful if you want to add Excel tables to a LaTeX document (assuming the widths and text sizes are consistent).     
+A script that automatically exports and crops Excel tables as individual PDF files. This is useful if you want to add Excel tables to a LaTeX document (assuming the table widths, fonts and font sizes are consistent).     
 
 ## Compatibility and Requirements
 
