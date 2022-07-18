@@ -13,7 +13,7 @@ i = 1 # File counter
 # Find all Excel in the same directory as this script
 for file in glob.glob("*.xlsx"):
     if i == 1:
-      print("Excel files found in " + dirName + ":")
+      print("Excel file(s) found in " + dirName + ":")
     fileNames.append(file)
     print(str(i) + ": " + file) # Display the Excel files found
     i += 1
@@ -29,7 +29,7 @@ if len(fileNames) > 0:
 
   excel = client.Dispatch("Excel.Application") # Open Microsoft Excel
 
-  print("\nPDFs exported to " + os.path.join(dirName + '\\output') + ":")
+  print("\nPDF(s) exported to " + os.path.join(dirName + '\\output') + ":")
   
   i = 1 # File export counter
   
@@ -41,7 +41,7 @@ if len(fileNames) > 0:
       print(str(i) + ": " + file.removesuffix(".xlsx") + '.pdf')
       i += 1
 
-  print("\nPDFs cropped in " + os.path.join(dirName + '\\output'))
+  print("\nPDF(s) cropped in " + os.path.join(dirName + '\\output'))
   i = 1 # File export counter
   for file in fileNames:
       os.chdir(dirName + '\\output\\')
